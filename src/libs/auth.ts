@@ -93,6 +93,10 @@ export const authOptions: NextAuthOptions = {
         if (!credentials?.token) return null
 
         try {
+          // wait
+          await new Promise(resolve => setTimeout(resolve, 2000))
+          console.log(credentials?.token, Date.now())
+
           // check is token is valid
           const verify = jwt.verify(credentials?.token, 'iamaloneiamaloneiamaloneiamaloneiamalone' as string)
 

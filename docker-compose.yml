@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  nextjs-app:
+    image: nextjs-example
+    container_name: nextjs-example
+    build:
+      context: .
+      dockerfile: ./DockerFile
+    env_file:
+      - ./.env
+    environment:
+      - TZ=Asia/Bangkok
+    ports:
+      - 1412:3000

@@ -1,0 +1,16 @@
+FROM node:20.13-slim
+RUN apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade && apt-get install -y alien libaio1 wget
+RUN wget https://download.oracle.com/otn_software/linux/instantclient/215000/oracle-instantclient-basic-21.5.0.0.0-1.el8.x86_64.rpm
+RUN alien -i --scripts oracle-instantclient-basic-21.5.0.0.0-1.el8.x86_64.rpm
+RUN rm -f oracle-instantclient-basic-21.5.0.0.0-1.el8.x86_64.rpm && apt-get -y autoremove && apt-get -y clean
+WORKDIR /usr/src/app
+COPY . .
+RUN npm install
+RUN npm run build
+CMD [ "npm", "start" ]
+
+# WORKDIR /usr/src/app
+# RUN cp -r /usr/src/builder/ /usr/src/app/
+# RUN cp -r /usr/src/builder/node_modules /usr/src/app/node_modules
+# RUN rm -rf /usr/src/builder
+# CMD [ "npm", "start" ]

@@ -4,9 +4,9 @@
   "license": "Commercial",
   "private": true,
   "scripts": {
-    "dev": "doppler run -- next dev -p 3000",
-    "build": "doppler run -- next build",
-    "start": "doppler run -- next start",
+    "dev": "next dev",
+    "build": "next build ",
+    "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",

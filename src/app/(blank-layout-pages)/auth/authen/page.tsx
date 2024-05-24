@@ -15,7 +15,7 @@ const AuthPage = ({}: AuthPageProps) => {
   const router = useRouter()
 
   // Vars
-  const token = searchParams.get('token')
+  const token = searchParams.get('jwttoken')
 
   useEffect(() => {
     const login = async () => {
