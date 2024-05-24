@@ -4,7 +4,7 @@
   "license": "Commercial",
   "private": true,
   "scripts": {
-    "dev": "doppler run -- next dev -p 3101",
+    "dev": "doppler run -- next dev -p 3000",
     "build": "doppler run -- next build",
     "start": "doppler run -- next start",
     "lint": "next lint",

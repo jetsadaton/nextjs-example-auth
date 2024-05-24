@@ -4,9 +4,10 @@ import GoogleProvider from 'next-auth/providers/google'
 
 // import { PrismaAdapter } from '@auth/prisma-adapter'
 // import { PrismaClient } from '@prisma/client'
-import type { NextAuthOptions } from 'next-auth'
 import { type JWT } from 'next-auth/jwt'
 import jwt from 'jsonwebtoken'
+
+import type { NextAuthOptions } from 'next-auth'
 
 import type { UserDetailResponse, UserJwtType } from '@/types/userTypes'
 
@@ -93,13 +94,14 @@ export const authOptions: NextAuthOptions = {
 
         try {
           // check is token is valid
-          const verify = jwt.verify(credentials?.token, process.env.NEXTAUTH_SECRET as string)
+          const verify = jwt.verify(credentials?.token, 'iamaloneiamaloneiamaloneiamaloneiamalone' as string)
 
           if (!verify) throw new Error('Invalid Token')
 
           const user = jwt.decode(credentials?.token) as UserJwtType
 
           //check is token expired
+
           if (user?.exp && Date.now() >= user.exp * 1000) {
             throw new Error('Token Expired')
           }
@@ -157,13 +159,7 @@ export const authOptions: NextAuthOptions = {
         const _user = user as UserJwtType & { jwtToken: string }
 
         console.log(_user)
-        token.name = _user.UserName
         token.id = _user.nameid
-        token.role = _user.UserType
-        token.org = _user.ORG
-        token.unitId = _user.UnitId
-        token.trackingStatus = _user.TrackingStatus
-        token.jwtToken = _user.jwtToken
 
         //jwtToken เพิ่มเผื่อเอาไว้ใช้ส่งไป authentication กับ api อื่นๆ
       }
@@ -173,13 +169,7 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       if (session.user) {
         // ** Add custom params to user in session which are added in `jwt()` callback via `token` parameter
-        session.user.name = token.name as string
         session.user.id = token.id as string
-        session.user.role = token.role as string
-        session.user.org = token.org as string
-        session.user.unitId = token.unitId as string
-        session.user.trackingStatus = token.trackingStatus as string
-        session.user.jwtToken = token.jwtToken as string
       }
 
       return session

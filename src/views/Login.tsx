@@ -115,7 +115,7 @@ const Login = ({ mode }: { mode: SystemMode }) => {
       await signIn('jwttoken', { token })
     }
 
-    const token = searchParams.get('token')
+    const token = searchParams.get('jwttoken')
 
     if (token) {
       login().catch(e => {
